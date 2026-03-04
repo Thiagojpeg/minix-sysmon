@@ -35,6 +35,7 @@
 #include <string.h>
 
 #include "vm.h"
+/* SysMon: Dependencia do clock para calculo de runtime acumulado */
 #include "clock.h"
 #include "spinlock.h"
 #include "arch_proto.h"
@@ -136,7 +137,7 @@ void proc_init(void)
 		rp->p_scheduler = NULL;		/* no user space scheduler */
 		rp->p_priority = 0;		/* no priority */
 		rp->p_quantum_size_ms = 0;	/* no quantum size */
-                /* SysMon: Zera as metricas iniciais */
+                /* SysMon: Inicializa contadores de performance do processo */
 		rp->p_total_runtime = 0;
 		rp->p_context_switches = 0;
 		rp->p_total_runtime_start = 0;
@@ -347,9 +348,7 @@ not_runnable_pick_new:
 	while (!(p = pick_proc())) {
 		idle();
 	}
-        /* ========================================================== *
-	 * Modificacao SysMon: Coleta de Dados no Context Switch      *
-	 * ========================================================== */
+       /* SysMon: Amostragem de performance no chaveamento de contexto */
 	if (p != old_p) {
 		if (old_p != NULL) {
 			old_p->p_context_switches++;
@@ -1630,6 +1629,7 @@ void enqueue(
  * This function can be used x-cpu as it always uses the queues of the cpu the
  * process is assigned to.
  */
+ /* SysMon: Incrementa interrupcoes de contexto logico */
   rp->p_context_switches++;
   int q = rp->p_priority;	 		/* scheduling queue to use */
   struct proc **rdy_head, **rdy_tail;
