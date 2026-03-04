@@ -3,16 +3,12 @@
 #include <lib.h>    // Necessario para _syscall e message
 #include <time.h>
 
-/* * IMPORTANTE: Substitua pelo numero da syscall que voce criou no PM.
- * Se voce nao lembra, verifique no /usr/src/minix/include/minix/callnr.h
- * ou onde voce registrou a nova funcao.
- */
-#define MY_SYSCALL_NR  48  // <--- TROQUE ISSO PELO SEU NUMERO
 
+#define MY_SYSCALL_NR  48  
 int main(int argc, char **argv) {
     message m;
     int status;
-    int pid = getpid(); // Vamos monitorar o proprio processo de teste
+    int pid = getpid(); // monitora o proprio processo de teste
     long start_time, end_time;
     long start_switches, end_switches;
     int i, j;
@@ -29,7 +25,7 @@ int main(int argc, char **argv) {
     }
 
     // Supondo que sua syscall retorne o tempo em m2_l1 e switches em m2_l2
-    // Ajuste conforme voce codificou no kernel!
+    
     start_time = m.m2_l1;
     start_switches = m.m2_l2;
 

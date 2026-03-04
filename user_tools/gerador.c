@@ -14,7 +14,7 @@ int main() {
     for(i = 0; i < 50; i++) {
         fprintf(f, "Gerando I/O - Linha %d\n", i);
         fflush(f); /* Força a gravação no disco agora */
-        sleep(1);  /* Pausa 1 segundo para você ter tempo de rodar o sysmon */
+        sleep(1);  /* Pausa 1 segundo para ter tempo de rodar o sysmon */
     }
     
     fclose(f);

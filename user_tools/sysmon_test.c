@@ -6,7 +6,6 @@
 #include <string.h>
 
 /* Forcamos a definicao aqui para ignorar o header desatualizado do sistema */
-/* Se no seu callnr.h voce colocou (PM_BASE + 48), e PM_BASE eh 0, entao eh 48 */
 #define SYS_MON_CALL 48 
 
 int main(int argc, char **argv) {
